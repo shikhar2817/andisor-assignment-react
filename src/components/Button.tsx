@@ -1,7 +1,6 @@
 import { cn } from "@/utils";
 import { VariantProps, cva } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
     children?: ReactNode;
@@ -15,7 +14,7 @@ export const Button: React.FC<Props> = ({ children, className, variant, ...props
     );
 };
 
-const buttonVariants = cva("rounded-full", {
+const buttonVariants = cva("text-center inline-flex items-center rounded-full", {
     variants: {
         variant: {
             primary:
