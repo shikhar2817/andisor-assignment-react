@@ -4,3 +4,4 @@ export { AddIcon } from "./AddIcon";
 export { QRCodeIcon } from "./QRCodeIcon";
 export { SearchIcon } from "./SearchIcon";
 export { PencilIcon } from "./PencilIcon";
+export { ChevronDownIcon } from "./ChevronDownIcon";

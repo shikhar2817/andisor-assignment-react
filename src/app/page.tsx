@@ -1,9 +1,6 @@
 "use client";
-import { Button } from "@/components";
-import { ToggleButton } from "@/components/ToggleButton";
-import { AddIcon, PuzzleIcon } from "@/icons";
-import { UploadIcon } from "@/icons/UploadIcon";
-import Image from "next/image";
+import { Button, ToggleButton } from "@/components";
+import { AddIcon, PuzzleIcon, UploadIcon } from "@/icons";
 
 export default function Home() {
     const handleClick = () => {
@@ -11,10 +8,34 @@ export default function Home() {
     };
     return (
         <h1 className="text-3xl font-bold underline">
-            <Button onClick={handleClick} variant="primary">
-                <AddIcon />
-                Export CSV
-            </Button>
+            <div className="flex justify-between items-center p-2 pb-0" role="group">
+                <div>
+                    <Button onClick={handleClick} variant="gaint" active="gaintActive">
+                        Inventory
+                    </Button>
+                    <Button onClick={handleClick} variant="gaint">
+                        Collections
+                    </Button>
+                    <Button onClick={handleClick} variant="gaint">
+                        Analytics
+                    </Button>
+                </div>
+                <div>
+                    <Button onClick={handleClick} variant="primary">
+                        <AddIcon />
+                        Add New Product
+                    </Button>
+                    <Button onClick={handleClick} variant="secondary">
+                        <PuzzleIcon />
+                        Import Data
+                    </Button>
+                    <Button onClick={handleClick} variant="secondary">
+                        <UploadIcon />
+                        Export CSV
+                    </Button>
+                </div>
+            </div>
+            <hr className="h-px m-2 mt-0 bg-gray-200 border-0 " />
 
             <ToggleButton />
         </h1>
