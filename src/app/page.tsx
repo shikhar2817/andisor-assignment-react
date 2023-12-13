@@ -1,13 +1,15 @@
 "use client";
-import { Button, ToggleButton } from "@/components";
+import { Button, Table, TableRow } from "@/components";
 import { AddIcon, PuzzleIcon, UploadIcon } from "@/icons";
+
+const columnList = ["Stock", "WHS", "Discount%", "Colour", "Sizes", "Inventory", "Lead Time"];
 
 export default function Home() {
     const handleClick = () => {
         console.log("tes");
     };
     return (
-        <h1 className="text-3xl font-bold underline">
+        <h1 className="text-3xl font-bold">
             <div className="flex justify-between items-center p-2 pb-0" role="group">
                 <div>
                     <Button onClick={handleClick} variant="gaint" active="gaintActive">
@@ -35,9 +37,13 @@ export default function Home() {
                     </Button>
                 </div>
             </div>
-            <hr className="h-px m-2 mt-0 bg-gray-200 border-0 " />
-
-            <ToggleButton />
+            <hr className="h-px m-2 mt-0 mb-0 bg-gray-200 border-0 " />
+            <Table tableColumnList={columnList}>
+                <TableRow />
+                <TableRow />
+                <TableRow />
+                <TableRow />
+            </Table>
         </h1>
     );
 }
