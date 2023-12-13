@@ -42,3 +42,4 @@ export const Table: React.FC<Props> = ({ children, tableColumnList = [] }) => {
 };
 
 export { TableRow } from "./TableRow";
+export { SubTableRow } from "./SubTableRow";
