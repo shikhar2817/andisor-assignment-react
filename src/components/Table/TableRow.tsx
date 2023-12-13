@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SubTableRow, ToggleButton } from "..";
 import { Product } from "@/types";
+import { ChevronDownIcon, ChevronUpIcon } from "@/icons";
 
 interface Props {
     product: Product;
@@ -20,6 +21,8 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                 >
                     <ToggleButton open={open} onClick={handleToggle} />
                     <div className="pl-5">{product.title}</div>
+                    {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                    <div className="text-xs font-light text-gray-500">{product.primary_variants.length} colors</div>
                 </th>
                 <td className="px-6 py-4">{product.inventory}</td>
                 <td className="px-6 py-4">${product.price}</td>

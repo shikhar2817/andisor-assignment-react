@@ -5,3 +5,4 @@ export { QRCodeIcon } from "./QRCodeIcon";
 export { SearchIcon } from "./SearchIcon";
 export { PencilIcon } from "./PencilIcon";
 export { ChevronDownIcon } from "./ChevronDownIcon";
+export { ChevronUpIcon } from "./ChevronUpIcon";

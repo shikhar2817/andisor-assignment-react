@@ -1,6 +1,7 @@
 import { PrimaryVariant, Product } from "@/types";
 import React, { useState } from "react";
 import { Badge } from "..";
+import { ChevronDownIcon, ChevronUpIcon } from "@/icons";
 
 interface Props {
     product: Product;
@@ -15,8 +16,12 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant }) => {
     return (
         <>
             <tr className="bg-white border-b" onClick={handleToggle}>
-                <th scope="row" className="px-6 pl-28 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <th scope="row" className="px-6 pl-28 inline-flex py-4 font-medium text-gray-900 whitespace-nowrap">
                     {primaryVariant.name}
+                    {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                    <div className="text-xs pt-1 m-0 inline-block align-bottom font-light text-gray-500">
+                        {primaryVariant.secondary_variants.length} sizes
+                    </div>
                     {primaryVariant.active ? <Badge>Active</Badge> : <></>}
                 </th>
                 <td className="px-6 py-4">{primaryVariant.inventory}</td>
