@@ -4,12 +4,13 @@ import { HTMLAttributes, ReactNode } from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof buttonVariants> {
     children?: ReactNode;
+    open?: boolean;
 }
 
-export const ToggleButton: React.FC<Props> = ({ children, className, variant, ...props }) => {
+export const ToggleButton: React.FC<Props> = ({ children, className, open = false, variant, ...props }) => {
     return (
         <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" value="" className="sr-only peer" />
+            <input type="checkbox" value="" className="sr-only peer" defaultChecked={open} />
             <div className={cn(buttonVariants({ variant }))} {...props} />
             {children}
         </label>

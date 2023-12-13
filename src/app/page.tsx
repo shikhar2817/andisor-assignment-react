@@ -1,7 +1,8 @@
 "use client";
-import { Button, Table, TableRow } from "@/components";
+import { useEffect, useState } from "react";
+import { Button, Loading, Table, TableRow } from "@/components";
 import { AddIcon, PuzzleIcon, UploadIcon } from "@/icons";
-import { TableColumnList } from "@/types";
+import { Data, TableColumnList } from "@/types";
 
 const columnList: TableColumnList[] = [
     {
@@ -33,9 +34,23 @@ const columnList: TableColumnList[] = [
 ];
 
 export default function Home() {
+    const [data, setData] = useState<Data>([]);
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("https://mocki.io/v1/c0f1b0df-0f5b-4f4b-84fa-60da0d131c27")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setData(data);
+                setLoading(false);
+            });
+    }, []);
+
     const handleClick = () => {
-        console.log("tes");
+        console.log("Clicked");
     };
+
     return (
         <h1 className="text-3xl font-bold">
             <div className="flex justify-between items-center p-2 pb-0" role="group">
@@ -66,12 +81,15 @@ export default function Home() {
                 </div>
             </div>
             <hr className="h-px m-2 mt-0 mb-0 bg-gray-200 border-0 " />
-            <Table tableColumnList={columnList}>
-                <TableRow />
-                <TableRow />
-                <TableRow />
-                <TableRow />
-            </Table>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <Table tableColumnList={columnList}>
+                    {data.map((product) => {
+                        return <TableRow product={product} key={product.id} />;
+                    })}
+                </Table>
+            )}
         </h1>
     );
 }
