@@ -2,6 +2,7 @@ import { PrimaryVariant, Product } from "@/types";
 import React, { useState } from "react";
 import { Badge } from "..";
 import { ChevronDownIcon, ChevronUpIcon } from "@/icons";
+import { sizeArrayGenerate } from "./TableRow";
 
 interface Props {
     product: Product;
@@ -28,7 +29,7 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant }) => {
                 <td className="px-6 py-4">${primaryVariant.price}</td>
                 <td className="px-6 py-4">{primaryVariant.discountPercentage}%</td>
                 <td className="px-6 py-4"></td>
-                <td className="px-6 py-4">{product.secondary_variant_name}</td>
+                <td className="px-6 py-4">{sizeArrayGenerate(primaryVariant.secondary_variants)}</td>
                 <td className="px-6 py-4">{primaryVariant.inventory}</td>
                 <td className="px-6 py-4">{product.leadTime}</td>
             </tr>
