@@ -1,9 +1,16 @@
 import { ReactNode } from "react";
 import { SearchBar } from "..";
+import { ChevronDownIcon } from "@/icons";
+
+export interface TableColumnList {
+    title: string;
+    sortable?: boolean;
+    symbol?: string;
+}
 
 interface Props {
     children?: ReactNode;
-    tableColumnList?: string[];
+    tableColumnList?: TableColumnList[];
 }
 
 export const Table: React.FC<Props> = ({ children, tableColumnList = [] }) => {
@@ -15,10 +22,14 @@ export const Table: React.FC<Props> = ({ children, tableColumnList = [] }) => {
                         <th scope="col" className="px-6 py-3">
                             <SearchBar />
                         </th>
-                        {tableColumnList.map((cloumnName, index) => {
+                        {tableColumnList.map((column, index) => {
                             return (
-                                <th key={`${cloumnName}-${index}`} scope="col" className="px-6 py-3">
-                                    {cloumnName}
+                                <th key={`${column.title}-${index}`} scope="col" className="px-6 py-3">
+                                    <div className="flex items-center">
+                                        {column.title}
+                                        {column.symbol ? column.symbol : ""}
+                                        {column.sortable ? <ChevronDownIcon /> : <></>}
+                                    </div>
                                 </th>
                             );
                         })}

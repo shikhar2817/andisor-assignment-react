@@ -1,8 +1,36 @@
 "use client";
 import { Button, Table, TableRow } from "@/components";
 import { AddIcon, PuzzleIcon, UploadIcon } from "@/icons";
+import { TableColumnList } from "@/types";
 
-const columnList = ["Stock", "WHS", "Discount%", "Colour", "Sizes", "Inventory", "Lead Time"];
+const columnList: TableColumnList[] = [
+    {
+        title: "Stock",
+        sortable: true,
+    },
+    {
+        title: "WHS",
+        sortable: true,
+    },
+    {
+        title: "Discount",
+        sortable: true,
+        symbol: "%",
+    },
+    {
+        title: "Colour",
+    },
+    {
+        title: "Sizes",
+    },
+    {
+        title: "Inventory",
+    },
+    {
+        title: "Lead Time",
+        sortable: true,
+    },
+];
 
 export default function Home() {
     const handleClick = () => {
