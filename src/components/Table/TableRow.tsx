@@ -7,18 +7,18 @@ interface Props {
     product: Product;
 }
 
-export const sizeArrayGenerate = (list: SecondaryVariant[]): string => {
+export const sizeArrayGenerate = (list: SecondaryVariant[]) => {
     let listString = "";
     let count = 0;
     for (let i = 0; i < Math.min(3, list.length); i++) {
         listString += list[i].name[0];
         if (i != 2) listString += ",";
     }
-    if (list.length <= 3) return listString;
+    if (list.length <= 3) return <div className="w-20 rounded-full">{listString}</div>;
     count = list.length - 3;
     listString += " +";
     listString += String(count);
-    return listString;
+    return <div className="w-20 rounded-full">{listString}</div>;
 };
 
 export const colorArrayGenerate = (list: PrimaryVariant[]) => {
@@ -38,10 +38,10 @@ export const colorArrayGenerate = (list: PrimaryVariant[]) => {
         );
 
     return (
-        <div className="">
+        <div>
             <Badge color={list[0].name.toLowerCase() as colorType} className="m-[1px]" />
             <Badge color={list[1].name.toLowerCase() as colorType} className="m-[1px]" />
-            <div>{`+${list.length - 2}`}</div>
+            <span className="ml-[2px] rounded-full">{`+${list.length - 2}`}</span>
         </div>
     );
 };
