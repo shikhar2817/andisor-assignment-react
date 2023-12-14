@@ -5,7 +5,7 @@ export interface Product {
     title: string;
     price: number;
     discountPercentage: number;
-    inventory: string;
+    inventory: number;
     active: boolean;
     leadTime: string;
     description: string;

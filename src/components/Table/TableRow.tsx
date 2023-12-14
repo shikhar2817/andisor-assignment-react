@@ -38,45 +38,88 @@ export const colorArrayGenerate = (list: PrimaryVariant[]) => {
         );
 
     return (
-        <div>
-            <Badge color={list[0].name.toLowerCase() as colorType} className="m-1" />
-            <Badge color={list[1].name.toLowerCase() as colorType} className="m-1" />+ {list.length - 2}
+        <div className="">
+            <Badge color={list[0].name.toLowerCase() as colorType} className="m-[1px]" />
+            <Badge color={list[1].name.toLowerCase() as colorType} className="m-[1px]" />
+            <div>{`+${list.length - 2}`}</div>
         </div>
     );
 };
 
 export const TableRow: React.FC<Props> = ({ product }) => {
+    const [prod, setProd] = useState(product);
     const [open, setOpen] = useState(false);
+    const [edit, setEdit] = useState(false);
+
     const handleToggle = () => {
         setOpen(!open);
     };
     return (
         <>
-            <tr className=" border-b">
+            <tr>
                 <th
                     scope="row"
-                    className="inline-flex items-end align-middle px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    className="inline-flex items-center align-middle px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 >
                     <ToggleButton open={open} onClick={handleToggle} />
-                    <div className="pl-5">{product.title}</div>
+                    {!edit ? (
+                        <div className="pl-5">{prod.title}</div>
+                    ) : (
+                        <input
+                            className="ml-2 pl-3 py-3 w-96 disabled:bg-transparent"
+                            defaultValue={prod.title}
+                            disabled={!edit}
+                        />
+                    )}
+
                     {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
-                    <div className="text-xs font-light text-gray-500">{product.primary_variants.length} colors</div>
+                    <div className="text-xs font-light text-gray-500">{prod.primary_variants.length} colors</div>
                 </th>
-                <td className="px-6 py-4">{product.inventory}</td>
-                <td className="px-6 py-4">${product.price}</td>
-                <td className="px-6 py-4">{product.discountPercentage}%</td>
-                <td className="px-6 py-4">{colorArrayGenerate(product.primary_variants)}</td>
-                <td className="px-6 py-4">{sizeArrayGenerate(product.primary_variants[0].secondary_variants)}</td>
-                <td className="px-6 py-4">{product.inventory}</td>
-                <td className="px-6 py-4">{product.leadTime}</td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={prod.inventory}
+                        disabled={!edit}
+                    />
+                </td>
+                <td>
+                    <input
+                        className="px-5 py-3 w-full disabled:bg-transparent"
+                        defaultValue={edit ? prod.price : `$${prod.price}`}
+                        disabled={!edit}
+                    />
+                </td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={edit ? prod.discountPercentage : `${prod.discountPercentage}%`}
+                        disabled={!edit}
+                    />
+                </td>
+                <td className="px-6 py-4">{colorArrayGenerate(prod.primary_variants)}</td>
+                <td className="px-6 py-4">{sizeArrayGenerate(prod.primary_variants[0].secondary_variants)}</td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={prod.inventory}
+                        disabled={!edit}
+                    />
+                </td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={prod.leadTime}
+                        disabled={!edit}
+                    />
+                </td>
             </tr>
             {open ? (
                 <>
-                    {product.primary_variants.map((primaryVariant, index) => {
+                    {prod.primary_variants.map((primaryVariant, index) => {
                         return (
                             <SubTableRow
                                 key={`${primaryVariant.name}-${index}`}
-                                product={product}
+                                product={prod}
                                 primaryVariant={primaryVariant}
                             />
                         );
