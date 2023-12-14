@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<ty
 
 export const Button: React.FC<Props> = ({ children, className, variant, active, ...props }) => {
     return (
-        <button type="button" className={cn(buttonVariants({ variant, active }))} {...props}>
+        <button type="button" className={cn(buttonVariants({ variant, active }), className)} {...props}>
             {children}
         </button>
     );

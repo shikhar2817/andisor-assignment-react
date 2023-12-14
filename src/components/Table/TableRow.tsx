@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Badge, SubTableRow, ToggleButton } from "..";
+import { Badge, Button, SubTableRow, ToggleButton } from "..";
 import { PrimaryVariant, Product, SecondaryVariant, colorType } from "@/types";
-import { ChevronDownIcon, ChevronUpIcon } from "@/icons";
+import { ChevronDownIcon, ChevronUpIcon, FloppyDiskIcon, PencilIcon } from "@/icons";
 
 interface Props {
     product: Product;
@@ -54,9 +54,14 @@ export const TableRow: React.FC<Props> = ({ product }) => {
     const handleToggle = () => {
         setOpen(!open);
     };
+
+    const handleEditToggle = () => {
+        setEdit(!edit);
+    };
+
     return (
         <>
-            <tr>
+            <tr className="cursor-pointer">
                 <th
                     scope="row"
                     className="inline-flex items-center align-middle px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
@@ -74,6 +79,29 @@ export const TableRow: React.FC<Props> = ({ product }) => {
 
                     {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
                     <div className="text-xs font-light text-gray-500">{prod.primary_variants.length} colors</div>
+                    {open && (
+                        <>
+                            {edit ? (
+                                <Button
+                                    variant="secondary"
+                                    className="text-purple-500 hover:bg-purple-200 hover:text-purple-700 mx-1 active:text-white"
+                                    onClick={handleEditToggle}
+                                >
+                                    {" "}
+                                    <FloppyDiskIcon /> Save
+                                </Button>
+                            ) : (
+                                <Button
+                                    variant="secondary"
+                                    className="text-purple-500 hover:bg-purple-200 hover:text-purple-700 mx-1 active:text-white"
+                                    onClick={handleEditToggle}
+                                >
+                                    {" "}
+                                    <PencilIcon /> Edit
+                                </Button>
+                            )}
+                        </>
+                    )}
                 </th>
                 <td>
                     <input
@@ -121,6 +149,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                                 key={`${primaryVariant.name}-${index}`}
                                 product={prod}
                                 primaryVariant={primaryVariant}
+                                edit={edit}
                             />
                         );
                     })}

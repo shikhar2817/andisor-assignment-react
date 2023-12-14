@@ -7,31 +7,78 @@ import { sizeArrayGenerate } from "./TableRow";
 interface Props {
     product: Product;
     primaryVariant: PrimaryVariant;
+    edit: boolean;
 }
 
-export const SubTableRow: React.FC<Props> = ({ product, primaryVariant }) => {
+export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) => {
     const [open, setOpen] = useState(false);
     const handleToggle = () => {
         setOpen(!open);
     };
     return (
         <>
-            <tr className="bg-white border-b" onClick={handleToggle}>
-                <th scope="row" className="px-6 pl-28 inline-flex py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {primaryVariant.name}
+            <tr className="bg-white border-b cursor-pointer">
+                <th
+                    scope="row"
+                    className="px-2 pl-28 inline-flex py-4 font-medium text-gray-900 whitespace-nowrap"
+                    onClick={handleToggle}
+                >
+                    {!edit ? (
+                        <>{primaryVariant.name}</>
+                    ) : (
+                        <input
+                            className="px-4 block w-80 disabled:bg-transparent"
+                            defaultValue={primaryVariant.name}
+                            disabled={!edit}
+                        />
+                    )}
+
                     {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
                     <div className="text-xs pt-1 m-0 inline-block align-bottom font-light text-gray-500">
                         {primaryVariant.secondary_variants.length} sizes
                     </div>
                     {primaryVariant.active ? <Badge>Active</Badge> : <></>}
                 </th>
-                <td className="px-6 py-4">{primaryVariant.inventory}</td>
-                <td className="px-6 py-4">${primaryVariant.price}</td>
-                <td className="px-6 py-4">{primaryVariant.discountPercentage}%</td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={primaryVariant.inventory}
+                        disabled={!edit}
+                    />
+                </td>
+                <td>
+                    <input
+                        className="px-5 py-3 w-full disabled:bg-transparent"
+                        defaultValue={edit ? primaryVariant.price : `$${primaryVariant.price}`}
+                        disabled={!edit}
+                    />
+                </td>
+                <td>
+                    <input
+                        className="px-5 py-3 w-full disabled:bg-transparent"
+                        defaultValue={
+                            edit ? primaryVariant.discountPercentage : `${primaryVariant.discountPercentage}%`
+                        }
+                        disabled={!edit}
+                    />
+                </td>
+
                 <td className="px-6 py-4"></td>
                 <td className="px-6 py-4">{sizeArrayGenerate(primaryVariant.secondary_variants)}</td>
-                <td className="px-6 py-4">{primaryVariant.inventory}</td>
-                <td className="px-6 py-4">{product.leadTime}</td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={primaryVariant.inventory}
+                        disabled={!edit}
+                    />
+                </td>
+                <td>
+                    <input
+                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        defaultValue={product.leadTime}
+                        disabled={!edit}
+                    />
+                </td>
             </tr>
             {open ? (
                 <>
@@ -39,15 +86,58 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant }) => {
                         return (
                             <tr className="bg-white border-b" key={`${secondaryVariant.name}-${index}`}>
                                 <th scope="row" className="px-6 pl-40 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {secondaryVariant.name}
+                                    {!edit ? (
+                                        <>{secondaryVariant.name}</>
+                                    ) : (
+                                        <input
+                                            className="px-4 block w-80 disabled:bg-transparent"
+                                            defaultValue={secondaryVariant.name}
+                                            disabled={!edit}
+                                        />
+                                    )}
                                 </th>
-                                <td className="px-6 py-4">{secondaryVariant.inventory}</td>
-                                <td className="px-6 py-4">${secondaryVariant.price}</td>
-                                <td className="px-6 py-4">{secondaryVariant.discountPercentage}%</td>
+                                <td>
+                                    <input
+                                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                                        defaultValue={secondaryVariant.inventory}
+                                        disabled={!edit}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        className="px-5 py-3 w-full disabled:bg-transparent"
+                                        defaultValue={edit ? secondaryVariant.price : `$${secondaryVariant.price}`}
+                                        disabled={!edit}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        className="px-5 py-3 w-full disabled:bg-transparent"
+                                        defaultValue={
+                                            edit
+                                                ? secondaryVariant.discountPercentage
+                                                : `${secondaryVariant.discountPercentage}%`
+                                        }
+                                        disabled={!edit}
+                                    />
+                                </td>
+
                                 <td className="px-6 py-4"></td>
                                 <td className="px-6 py-4"></td>
-                                <td className="px-6 py-4">{secondaryVariant.inventory}</td>
-                                <td className="px-6 py-4">{product.leadTime}</td>
+                                <td>
+                                    <input
+                                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                                        defaultValue={secondaryVariant.inventory}
+                                        disabled={!edit}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                                        defaultValue={product.leadTime}
+                                        disabled={!edit}
+                                    />
+                                </td>
                             </tr>
                         );
                     })}
