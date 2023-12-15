@@ -22,7 +22,7 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                primary: "peer-checked:bg-blue-600",
+                primary: "peer-checked:bg-purple-800",
                 secondary: "peer-checked:bg-gray-600",
             },
         },

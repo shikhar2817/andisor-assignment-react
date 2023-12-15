@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Badge, Button, SubTableRow, ToggleButton } from "..";
 import { PrimaryVariant, Product, SecondaryVariant, colorType } from "@/types";
 import { ChevronDownIcon, ChevronUpIcon, FloppyDiskIcon, PencilIcon } from "@/icons";
+import { cn } from "@/utils";
 
 interface Props {
     product: Product;
@@ -65,7 +66,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
 
     return (
         <>
-            <tr className="cursor-pointer">
+            <tr className={cn("cursor-pointer", open ? "bg-purple-200" : "")}>
                 <th
                     scope="row"
                     className="inline-flex items-center align-middle px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
@@ -75,7 +76,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                         <div className="pl-5">{prod.title}</div>
                     ) : (
                         <input
-                            className="ml-2 pl-3 py-3 w-96 disabled:bg-transparent"
+                            className="ml-2 pl-3 py-3 w-96 bg-transparent disabled:bg-transparent"
                             defaultValue={prod.title}
                             disabled={!edit}
                         />
@@ -109,21 +110,21 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                 </th>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={prod.inventory}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
-                        className="px-5 py-3 w-full disabled:bg-transparent"
+                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
                         defaultValue={edit ? prod.price : `$${prod.price}`}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={edit ? prod.discountPercentage : `${prod.discountPercentage}%`}
                         disabled={!edit}
                     />
@@ -132,14 +133,14 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                 <td className="px-6 py-4">{sizeArrayGenerate(prod.primary_variants[0].secondary_variants)}</td>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={prod.inventory}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={prod.leadTime}
                         disabled={!edit}
                     />

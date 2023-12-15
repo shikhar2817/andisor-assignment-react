@@ -23,7 +23,7 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                         <>{primaryVariant.name}</>
                     ) : (
                         <input
-                            className="px-4 block w-80 disabled:bg-transparent"
+                            className="px-4 block w-80 bg-transparent disabled:bg-transparent"
                             defaultValue={primaryVariant.name}
                             disabled={!edit}
                         />
@@ -40,21 +40,21 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                 </th>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={primaryVariant.inventory}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
-                        className="px-5 py-3 w-full disabled:bg-transparent"
+                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
                         defaultValue={edit ? primaryVariant.price : `$${primaryVariant.price}`}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
-                        className="px-5 py-3 w-full disabled:bg-transparent"
+                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
                         defaultValue={
                             edit ? primaryVariant.discountPercentage : `${primaryVariant.discountPercentage}%`
                         }
@@ -66,14 +66,14 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                 <td className="px-6 py-4">{sizeArrayGenerate(primaryVariant.secondary_variants)}</td>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={primaryVariant.inventory}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
-                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         defaultValue={product.leadTime}
                         disabled={!edit}
                     />
@@ -89,7 +89,7 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                                         <>{secondaryVariant.name}</>
                                     ) : (
                                         <input
-                                            className="px-4 block w-80 disabled:bg-transparent"
+                                            className="px-4 block w-80 bg-transparent disabled:bg-transparent"
                                             defaultValue={secondaryVariant.name}
                                             disabled={!edit}
                                         />
@@ -97,21 +97,21 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                                 </th>
                                 <td>
                                     <input
-                                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                         defaultValue={secondaryVariant.inventory}
                                         disabled={!edit}
                                     />
                                 </td>
                                 <td>
                                     <input
-                                        className="px-5 py-3 w-full disabled:bg-transparent"
+                                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
                                         defaultValue={edit ? secondaryVariant.price : `$${secondaryVariant.price}`}
                                         disabled={!edit}
                                     />
                                 </td>
                                 <td>
                                     <input
-                                        className="px-5 py-3 w-full disabled:bg-transparent"
+                                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
                                         defaultValue={
                                             edit
                                                 ? secondaryVariant.discountPercentage
@@ -125,14 +125,14 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                                 <td className="px-6 py-4"></td>
                                 <td>
                                     <input
-                                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                         defaultValue={secondaryVariant.inventory}
                                         disabled={!edit}
                                     />
                                 </td>
                                 <td>
                                     <input
-                                        className="px-5 py-3 block w-full disabled:bg-transparent"
+                                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                         defaultValue={product.leadTime}
                                         disabled={!edit}
                                     />
