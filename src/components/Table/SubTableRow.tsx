@@ -75,7 +75,7 @@ export const SubTableRow: React.FC<Props> = ({
                         type="number"
                         name="inventory"
                         onChange={(e) => handleChange(subRowIndex, e)}
-                        defaultValue={primaryVariant.inventory}
+                        value={primaryVariant.inventory}
                         disabled={!edit}
                     />
                 </td>
@@ -85,7 +85,7 @@ export const SubTableRow: React.FC<Props> = ({
                             className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                             type="number"
                             name="price"
-                            defaultValue={primaryVariant.price}
+                            value={primaryVariant.price}
                             onChange={(e) => handleChange(subRowIndex, e)}
                         />
                     ) : (
@@ -98,7 +98,7 @@ export const SubTableRow: React.FC<Props> = ({
                             className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                             type="number"
                             name="discountPercentage"
-                            defaultValue={primaryVariant.discountPercentage}
+                            value={primaryVariant.discountPercentage}
                             onChange={(e) => handleChange(subRowIndex, e)}
                         />
                     ) : (
@@ -113,7 +113,7 @@ export const SubTableRow: React.FC<Props> = ({
                         type="number"
                         name="inventory"
                         onChange={(e) => handleChange(subRowIndex, e)}
-                        defaultValue={primaryVariant.inventory}
+                        value={primaryVariant.inventory}
                         disabled={!edit}
                     />
                 </td>
@@ -160,7 +160,7 @@ export const SubTableRow: React.FC<Props> = ({
                                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                         type="number"
                                         name="inventory"
-                                        defaultValue={secondaryVariant.inventory}
+                                        value={secondaryVariant.inventory}
                                         onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         disabled={!edit}
                                     />
@@ -171,7 +171,7 @@ export const SubTableRow: React.FC<Props> = ({
                                             className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                             type="number"
                                             name="price"
-                                            defaultValue={secondaryVariant.price}
+                                            value={secondaryVariant.price}
                                             onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         />
                                     ) : (
@@ -184,7 +184,7 @@ export const SubTableRow: React.FC<Props> = ({
                                             className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                             type="number"
                                             name="discountPercentage"
-                                            defaultValue={secondaryVariant.discountPercentage}
+                                            value={secondaryVariant.discountPercentage}
                                             onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         />
                                     ) : (
@@ -199,7 +199,7 @@ export const SubTableRow: React.FC<Props> = ({
                                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                                         type="number"
                                         name="inventory"
-                                        defaultValue={secondaryVariant.inventory}
+                                        value={secondaryVariant.inventory}
                                         onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         disabled={!edit}
                                     />

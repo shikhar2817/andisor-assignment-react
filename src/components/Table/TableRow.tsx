@@ -7,6 +7,7 @@ import { cn } from "@/utils";
 interface Props {
     product: Product;
     productIndex: number;
+    updateTableRow: (rowIndex: number, product: Product) => void;
 }
 
 export const sizeArrayGenerate = (list: SecondaryVariant[]) => {
@@ -48,7 +49,7 @@ export const colorArrayGenerate = (list: PrimaryVariant[]) => {
     );
 };
 
-export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
+export const TableRow: React.FC<Props> = ({ product, productIndex, updateTableRow }) => {
     const [prod, setProd] = useState(product);
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -63,6 +64,7 @@ export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
 
     const handleSave = () => {
         setEdit(false);
+        updateTableRow(productIndex, prod);
     };
 
     const handleProductChange = (e: { target: { name: any; value: any } }) => {
@@ -116,7 +118,7 @@ export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
                             className="ml-2 pl-3 py-3 w-96 bg-transparent disabled:bg-transparent"
                             type="text"
                             name="title"
-                            defaultValue={prod.title}
+                            value={prod.title}
                             onChange={handleProductChange}
                         />
                     )}
@@ -152,7 +154,7 @@ export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         type="number"
                         name="inventory"
-                        defaultValue={prod.inventory}
+                        value={prod.inventory}
                         onChange={handleProductChange}
                         disabled={!edit}
                     />
@@ -163,7 +165,7 @@ export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
                             type="number"
                             name="price"
                             className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
-                            defaultValue={prod.price}
+                            value={prod.price}
                             onChange={handleProductChange}
                         />
                     ) : (
@@ -176,7 +178,7 @@ export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
                             className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                             type="number"
                             name="discountPercentage"
-                            defaultValue={prod.discountPercentage}
+                            value={prod.discountPercentage}
                             onChange={handleProductChange}
                         />
                     ) : (
@@ -190,7 +192,7 @@ export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         type="number"
                         name="inventory"
-                        defaultValue={prod.inventory}
+                        value={prod.inventory}
                         onChange={handleProductChange}
                         disabled={!edit}
                     />

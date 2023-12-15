@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button, Loading, Table, TableRow } from "@/components";
 import { AddIcon, PuzzleIcon, UploadIcon } from "@/icons";
-import { Data, TableColumnList } from "@/types";
+import { Data, Product, TableColumnList } from "@/types";
 
 const columnList: TableColumnList[] = [
     {
@@ -38,17 +38,31 @@ export default function Home() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://mocki.io/v1/c0f1b0df-0f5b-4f4b-84fa-60da0d131c27")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setData(data);
-                setLoading(false);
-            });
+        // if data present in localStorage then use local data
+        if (localStorage.getItem("data")) {
+            setData(JSON.parse(localStorage.getItem("data") as string));
+            setLoading(false);
+        } else {
+            fetch("https://mocki.io/v1/c0f1b0df-0f5b-4f4b-84fa-60da0d131c27")
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    setData(data);
+                    setLoading(false);
+                    localStorage.setItem("data", JSON.stringify(data));
+                });
+        }
     }, []);
 
     const handleClick = () => {
         console.log("Clicked");
+    };
+
+    const updateTableRow = (rowIndex: number, product: Product) => {
+        let newData = data;
+        newData[rowIndex] = product;
+        setData(newData);
+        localStorage.setItem("data", JSON.stringify(newData));
     };
 
     return (
@@ -86,7 +100,14 @@ export default function Home() {
             ) : (
                 <Table tableColumnList={columnList}>
                     {data.map((product, index) => {
-                        return <TableRow product={product} key={product.id} productIndex={index} />;
+                        return (
+                            <TableRow
+                                product={product}
+                                key={product.id}
+                                productIndex={index}
+                                updateTableRow={updateTableRow}
+                            />
+                        );
                     })}
                 </Table>
             )}
