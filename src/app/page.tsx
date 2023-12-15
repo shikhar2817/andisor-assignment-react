@@ -85,8 +85,8 @@ export default function Home() {
                 <Loading />
             ) : (
                 <Table tableColumnList={columnList}>
-                    {data.map((product) => {
-                        return <TableRow product={product} key={product.id} />;
+                    {data.map((product, index) => {
+                        return <TableRow product={product} key={product.id} productIndex={index} />;
                     })}
                 </Table>
             )}

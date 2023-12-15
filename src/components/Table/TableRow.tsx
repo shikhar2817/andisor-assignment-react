@@ -6,6 +6,7 @@ import { cn } from "@/utils";
 
 interface Props {
     product: Product;
+    productIndex: number;
 }
 
 export const sizeArrayGenerate = (list: SecondaryVariant[]) => {
@@ -47,7 +48,7 @@ export const colorArrayGenerate = (list: PrimaryVariant[]) => {
     );
 };
 
-export const TableRow: React.FC<Props> = ({ product }) => {
+export const TableRow: React.FC<Props> = ({ product, productIndex }) => {
     const [prod, setProd] = useState(product);
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -69,7 +70,6 @@ export const TableRow: React.FC<Props> = ({ product }) => {
     };
 
     const handlePrimaryVariantChange = (index: number, e: { target: { name: any; value: any } }) => {
-        console.log(e.target.name);
         if (e.target.name === "leadTime") {
             setProd({ ...prod, [e.target.name]: e.target.value });
             return;
@@ -118,7 +118,6 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                             name="title"
                             defaultValue={prod.title}
                             onChange={handleProductChange}
-                            disabled={!edit}
                         />
                     )}
 
@@ -166,7 +165,6 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                             className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
                             defaultValue={prod.price}
                             onChange={handleProductChange}
-                            disabled={!edit}
                         />
                     ) : (
                         <span className="px-5 py-3 block w-full bg-transparent">{`$${prod.price}`}</span>
@@ -180,7 +178,6 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                             name="discountPercentage"
                             defaultValue={prod.discountPercentage}
                             onChange={handleProductChange}
-                            disabled={!edit}
                         />
                     ) : (
                         <span className="px-5 py-3 block w-full bg-transparent">{`${prod.discountPercentage}%`}</span>
@@ -203,7 +200,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
                         type="text"
                         name="leadTime"
-                        defaultValue={prod.leadTime}
+                        value={prod.leadTime}
                         onChange={handleProductChange}
                         disabled={!edit}
                     />
