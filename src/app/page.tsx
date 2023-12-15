@@ -43,6 +43,7 @@ export default function Home() {
             setData(JSON.parse(localStorage.getItem("data") as string));
             setLoading(false);
         } else {
+            // if data not present in localStorage then get the data from the api
             fetch("https://mocki.io/v1/c0f1b0df-0f5b-4f4b-84fa-60da0d131c27")
                 .then((res) => res.json())
                 .then((data) => {
