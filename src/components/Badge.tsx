@@ -1,14 +1,14 @@
 import { colorType } from "@/types";
 import { cn } from "@/utils";
-import React, { ReactNode } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLSpanElement> {
     children?: ReactNode;
     color?: colorType;
     className?: string;
 }
 
-export const Badge: React.FC<Props> = ({ children, className, color = "green" }) => {
+export const Badge: React.FC<Props> = ({ children, className, color = "green", ...props }) => {
     const colorClass = {
         red: "bg-red-500 border border-red-500",
         green: "bg-green-500 border border-green-500",
@@ -23,6 +23,7 @@ export const Badge: React.FC<Props> = ({ children, className, color = "green" })
                 colorClass[color],
                 className
             )}
+            {...props}
         >
             {children}
         </span>

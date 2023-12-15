@@ -18,11 +18,7 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
     return (
         <>
             <tr className="bg-white border-b cursor-pointer">
-                <th
-                    scope="row"
-                    className="px-2 pl-28 inline-flex py-4 font-medium text-gray-900 whitespace-nowrap"
-                    onClick={handleToggle}
-                >
+                <th scope="row" className="px-2 pl-28 inline-flex py-4 font-medium text-gray-900 whitespace-nowrap">
                     {!edit ? (
                         <>{primaryVariant.name}</>
                     ) : (
@@ -33,11 +29,14 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit }) 
                         />
                     )}
 
-                    {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
-                    <div className="text-xs pt-1 m-0 inline-block align-bottom font-light text-gray-500">
+                    {open ? <ChevronDownIcon onClick={handleToggle} /> : <ChevronUpIcon onClick={handleToggle} />}
+                    <div
+                        onClick={handleToggle}
+                        className="text-xs pt-1 m-0 inline-block align-bottom font-light text-gray-500"
+                    >
                         {primaryVariant.secondary_variants.length} sizes
                     </div>
-                    {primaryVariant.active ? <Badge>Active</Badge> : <></>}
+                    {primaryVariant.active ? <Badge onClick={handleToggle}>Active</Badge> : <></>}
                 </th>
                 <td>
                     <input

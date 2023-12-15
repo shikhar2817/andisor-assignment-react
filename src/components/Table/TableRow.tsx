@@ -55,8 +55,12 @@ export const TableRow: React.FC<Props> = ({ product }) => {
         setOpen(!open);
     };
 
-    const handleEditToggle = () => {
+    const handleEdit = () => {
         setEdit(!edit);
+    };
+
+    const handleSave = () => {
+        setEdit(false);
     };
 
     return (
@@ -85,7 +89,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                                 <Button
                                     variant="secondary"
                                     className="text-purple-500 hover:bg-purple-200 hover:text-purple-700 mx-1 active:text-white"
-                                    onClick={handleEditToggle}
+                                    onClick={handleSave}
                                 >
                                     {" "}
                                     <FloppyDiskIcon /> Save
@@ -94,7 +98,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                                 <Button
                                     variant="secondary"
                                     className="text-purple-500 hover:bg-purple-200 hover:text-purple-700 mx-1 active:text-white"
-                                    onClick={handleEditToggle}
+                                    onClick={handleEdit}
                                 >
                                     {" "}
                                     <PencilIcon /> Edit
