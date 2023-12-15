@@ -64,6 +64,36 @@ export const TableRow: React.FC<Props> = ({ product }) => {
         setEdit(false);
     };
 
+    const handleProductChange = (e: { target: { name: any; value: any } }) => {
+        setProd({ ...prod, [e.target.name]: e.target.value });
+    };
+
+    const handlePrimaryVariantChange = (index: number, e: { target: { name: any; value: any } }) => {
+        if (e.target.name === "leadTime") {
+            setProd({ ...prod, [e.target.name]: e.target.value });
+            return;
+        }
+        let newPV = { ...prod.primary_variants[index], [e.target.name]: e.target.value };
+        let PVarray = prod.primary_variants;
+        PVarray[index] = newPV;
+        setProd({ ...prod, primary_variants: PVarray });
+    };
+
+    const handleSecondaryVariantChange = (
+        primaryIndex: number,
+        secondryIndex: number,
+        e: { target: { name: any; value: any } }
+    ) => {
+        if (e.target.name === "leadTime") {
+            setProd({ ...prod, [e.target.name]: e.target.value });
+            return;
+        }
+        // let newSV = { ...prod.primary_variants[primaryIndex].secondary_variants[secondryIndex], [e.target.name]: e.target.value };
+        // let PVarray = prod.primary_variants;
+        // PVarray[index] = newPV;
+        // setProd({ ...prod, primary_variants: PVarray });
+    };
+
     return (
         <>
             <tr className={cn("cursor-pointer", open ? "bg-purple-200" : "")}>
@@ -77,7 +107,10 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                     ) : (
                         <input
                             className="ml-2 pl-3 py-3 w-96 bg-transparent disabled:bg-transparent"
+                            type="text"
+                            name="title"
                             defaultValue={prod.title}
+                            onChange={handleProductChange}
                             disabled={!edit}
                         />
                     )}
@@ -111,37 +144,60 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                 <td>
                     <input
                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                        type="number"
+                        name="inventory"
                         defaultValue={prod.inventory}
+                        onChange={handleProductChange}
                         disabled={!edit}
                     />
                 </td>
                 <td>
-                    <input
-                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
-                        defaultValue={edit ? prod.price : `$${prod.price}`}
-                        disabled={!edit}
-                    />
+                    {edit ? (
+                        <input
+                            type="number"
+                            name="price"
+                            className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
+                            defaultValue={prod.price}
+                            onChange={handleProductChange}
+                            disabled={!edit}
+                        />
+                    ) : (
+                        <span className="px-5 py-3 block w-full bg-transparent">{`$${prod.price}`}</span>
+                    )}
                 </td>
                 <td>
-                    <input
-                        className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
-                        defaultValue={edit ? prod.discountPercentage : `${prod.discountPercentage}%`}
-                        disabled={!edit}
-                    />
+                    {edit ? (
+                        <input
+                            className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                            type="number"
+                            name="discountPercentage"
+                            defaultValue={prod.discountPercentage}
+                            onChange={handleProductChange}
+                            disabled={!edit}
+                        />
+                    ) : (
+                        <span className="px-5 py-3 block w-full bg-transparent">{`${prod.discountPercentage}%`}</span>
+                    )}
                 </td>
                 <td className="px-6 py-4">{colorArrayGenerate(prod.primary_variants)}</td>
                 <td className="px-6 py-4">{sizeArrayGenerate(prod.primary_variants[0].secondary_variants)}</td>
                 <td>
                     <input
                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                        type="number"
+                        name="inventory"
                         defaultValue={prod.inventory}
+                        onChange={handleProductChange}
                         disabled={!edit}
                     />
                 </td>
                 <td>
                     <input
                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                        type="text"
+                        name="leadTime"
                         defaultValue={prod.leadTime}
+                        onChange={handleProductChange}
                         disabled={!edit}
                     />
                 </td>
@@ -155,6 +211,8 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                                 product={prod}
                                 primaryVariant={primaryVariant}
                                 edit={edit}
+                                handleChange={handlePrimaryVariantChange}
+                                subRowIndex={index}
                             />
                         );
                     })}
