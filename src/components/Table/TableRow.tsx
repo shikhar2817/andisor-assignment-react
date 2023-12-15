@@ -69,6 +69,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
     };
 
     const handlePrimaryVariantChange = (index: number, e: { target: { name: any; value: any } }) => {
+        console.log(e.target.name);
         if (e.target.name === "leadTime") {
             setProd({ ...prod, [e.target.name]: e.target.value });
             return;
@@ -88,10 +89,16 @@ export const TableRow: React.FC<Props> = ({ product }) => {
             setProd({ ...prod, [e.target.name]: e.target.value });
             return;
         }
-        // let newSV = { ...prod.primary_variants[primaryIndex].secondary_variants[secondryIndex], [e.target.name]: e.target.value };
-        // let PVarray = prod.primary_variants;
-        // PVarray[index] = newPV;
-        // setProd({ ...prod, primary_variants: PVarray });
+        let newSV = {
+            ...prod.primary_variants[primaryIndex].secondary_variants[secondryIndex],
+            [e.target.name]: e.target.value,
+        };
+        let SVarray = prod.primary_variants[primaryIndex].secondary_variants;
+        SVarray[secondryIndex] = newSV;
+
+        let PVarray = prod.primary_variants;
+        PVarray[primaryIndex].secondary_variants = SVarray;
+        setProd({ ...prod, primary_variants: PVarray });
     };
 
     return (
@@ -212,6 +219,7 @@ export const TableRow: React.FC<Props> = ({ product }) => {
                                 primaryVariant={primaryVariant}
                                 edit={edit}
                                 handleChange={handlePrimaryVariantChange}
+                                handleSecondaryChange={handleSecondaryVariantChange}
                                 subRowIndex={index}
                             />
                         );

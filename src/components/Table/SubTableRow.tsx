@@ -10,9 +10,21 @@ interface Props {
     edit: boolean;
     subRowIndex: number;
     handleChange: (index: number, e: { target: { name: any; value: any } }) => void;
+    handleSecondaryChange: (
+        primaryIndex: number,
+        secondryIndex: number,
+        e: { target: { name: any; value: any } }
+    ) => void;
 }
 
-export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit, subRowIndex, handleChange }) => {
+export const SubTableRow: React.FC<Props> = ({
+    product,
+    primaryVariant,
+    edit,
+    subRowIndex,
+    handleChange,
+    handleSecondaryChange,
+}) => {
     const [open, setOpen] = useState(false);
     const handleToggle = () => {
         setOpen(!open);
@@ -20,7 +32,7 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit, su
 
     return (
         <>
-            <tr className="bg-white border-b cursor-pointer">
+            <tr className="bg-white border-b">
                 <th scope="row" className="px-2 pl-28 inline-flex py-4 font-medium text-gray-900 whitespace-nowrap">
                     {!edit ? (
                         <>{primaryVariant.name}</>
@@ -53,11 +65,17 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit, su
                     {open ? <ChevronDownIcon onClick={handleToggle} /> : <ChevronUpIcon onClick={handleToggle} />}
                     <div
                         onClick={handleToggle}
-                        className="text-xs pt-1 m-0 inline-block align-bottom font-light text-gray-500"
+                        className="cursor-pointer text-xs pt-1 m-0 inline-block align-bottom font-light text-gray-500"
                     >
                         {primaryVariant.secondary_variants.length} sizes
                     </div>
-                    {primaryVariant.active ? <Badge onClick={handleToggle}>Active</Badge> : <></>}
+                    {primaryVariant.active ? (
+                        <Badge className="cursor-pointer" onClick={handleToggle}>
+                            Active
+                        </Badge>
+                    ) : (
+                        <></>
+                    )}
                 </th>
                 <td>
                     <input
@@ -132,10 +150,10 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit, su
                                         <select
                                             className="px-4 block w-52 bg-transparent disabled:bg-transparent"
                                             name="name"
-                                            // onChange={(e) => handleChange(subRowIndex, e)}
+                                            onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                             disabled={!edit}
                                         >
-                                            <option selected>Choose a color</option>
+                                            <option selected>Choose a size</option>
                                             <option
                                                 value="Extra Small"
                                                 selected={secondaryVariant.name === "Extra Small"}
@@ -157,33 +175,52 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit, su
                                             >
                                                 Extra Large
                                             </option>
+                                            <option
+                                                value="Double Extra Large"
+                                                selected={secondaryVariant.name === "Double Extra Large"}
+                                            >
+                                                Double Extra Large
+                                            </option>
                                         </select>
                                     )}
                                 </th>
                                 <td>
                                     <input
                                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                                        type="number"
+                                        name="inventory"
                                         defaultValue={secondaryVariant.inventory}
+                                        onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         disabled={!edit}
                                     />
                                 </td>
                                 <td>
-                                    <input
-                                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
-                                        defaultValue={edit ? secondaryVariant.price : `$${secondaryVariant.price}`}
-                                        disabled={!edit}
-                                    />
+                                    {edit ? (
+                                        <input
+                                            className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                                            type="number"
+                                            name="price"
+                                            defaultValue={secondaryVariant.price}
+                                            onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
+                                            disabled={!edit}
+                                        />
+                                    ) : (
+                                        <span className="px-5 py-3 block w-full bg-transparent">{`$${secondaryVariant.price}`}</span>
+                                    )}
                                 </td>
                                 <td>
-                                    <input
-                                        className="px-5 py-3 w-full bg-transparent disabled:bg-transparent"
-                                        defaultValue={
-                                            edit
-                                                ? secondaryVariant.discountPercentage
-                                                : `${secondaryVariant.discountPercentage}%`
-                                        }
-                                        disabled={!edit}
-                                    />
+                                    {edit ? (
+                                        <input
+                                            className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                                            type="number"
+                                            name="discountPercentage"
+                                            defaultValue={secondaryVariant.discountPercentage}
+                                            onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
+                                            disabled={!edit}
+                                        />
+                                    ) : (
+                                        <span className="px-5 py-3 block w-full bg-transparent">{`${secondaryVariant.discountPercentage}%`}</span>
+                                    )}
                                 </td>
 
                                 <td className="px-6 py-4"></td>
@@ -191,14 +228,20 @@ export const SubTableRow: React.FC<Props> = ({ product, primaryVariant, edit, su
                                 <td>
                                     <input
                                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                                        type="number"
+                                        name="inventory"
                                         defaultValue={secondaryVariant.inventory}
+                                        onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         disabled={!edit}
                                     />
                                 </td>
                                 <td>
                                     <input
                                         className="px-5 py-3 block w-full bg-transparent disabled:bg-transparent"
+                                        type="text"
+                                        name="leadTime"
                                         defaultValue={product.leadTime}
+                                        onChange={(e) => handleSecondaryChange(subRowIndex, index, e)}
                                         disabled={!edit}
                                     />
                                 </td>
